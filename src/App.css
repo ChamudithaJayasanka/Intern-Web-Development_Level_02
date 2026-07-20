@@ -1,0 +1,185 @@
+/* ===== Amazon-inspired playful calculator ===== */
+
+:root{
+  --navy: #131921;
+  --navy-light: #232f3e;
+  --orange: #FF9900;
+  --orange-dark: #e88a00;
+  --yellow: #FFC93C;
+  --mint: #1BC47D;
+  --mint-dark: #14a06a;
+  --paper: #FFFFFF;
+  --ink: #131921;
+  --muted: #6b7280;
+}
+
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(255,153,0,0.10), transparent 35%),
+    radial-gradient(circle at 85% 80%, rgba(27,196,125,0.10), transparent 35%),
+    #f1f3f6;
+}
+
+.app{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+
+/* The "package box" card */
+.calculator{
+  position:relative;
+  background:var(--paper);
+  padding:0 22px 25px;
+  border-radius:18px;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.6) inset,
+    0 18px 40px rgba(19,25,33,0.18);
+  width:320px;
+  overflow:hidden;
+  border:1px solid #e8e8e8;
+}
+
+/* Shipping-label header strip, like Amazon's top nav */
+.calculator h2{
+  margin:0 -22px 18px;
+  padding:18px 22px 22px;
+  text-align:center;
+  color:#fff;
+  background:var(--navy);
+  font-weight:700;
+  font-size:18px;
+  letter-spacing:0.3px;
+  border-radius:0 0 50% 50% / 0 0 16px 16px;
+  position:relative;
+}
+
+/* The smile/arrow swoosh signature, echoing the Amazon logo */
+.calculator h2::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:6px;
+  width:46px;
+  height:14px;
+  transform:translateX(-50%);
+  border-bottom:4px solid var(--orange);
+  border-radius:0 0 50% 50%;
+}
+.calculator h2::before{
+  content:"";
+  position:absolute;
+  left:calc(50% + 21px);
+  bottom:4px;
+  width:0;
+  height:0;
+  border:5px solid transparent;
+  border-left-color:var(--orange);
+  border-right:0;
+  transform:translateX(-50%) rotate(15deg);
+}
+
+.display{
+  width:100%;
+  box-sizing:border-box;
+  padding:16px 14px;
+  margin:0 0 16px;
+  font-family:'Poppins',sans-serif;
+  font-weight:800;
+  font-size:28px;
+  text-align:right;
+  color:var(--ink);
+  background:#fbfbfc;
+  border:2px solid #e3e6ea;
+  border-radius:12px;
+  letter-spacing:0.5px;
+}
+
+.buttons{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+
+button{
+  padding:16px 0;
+  font-size:17px;
+  font-weight:600;
+  color:var(--ink);
+  cursor:pointer;
+  border:none;
+  border-radius:12px;
+  background:#f0f2f5;
+  box-shadow:0 2px 0 rgba(19,25,33,0.06);
+  transition:transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+}
+
+button:hover{
+  transform:translateY(-2px);
+  background:#e9edf2;
+}
+
+button:active{
+  transform:translateY(0) scale(0.97);
+  box-shadow:none;
+}
+
+/* Operators: warm yellow, candy-like */
+button.operator{
+  background:var(--yellow);
+  color:var(--ink);
+}
+button.operator:hover{
+  background:#ffd966;
+}
+
+/* Equals: the "deal sticker" badge — the one bold flourish */
+button.equals{
+  background:var(--orange);
+  color:#fff;
+  font-weight:800;
+  box-shadow:0 4px 0 var(--orange-dark);
+}
+button.equals:hover{
+  background:#ffa726;
+  transform:translateY(-2px);
+}
+button.equals:active{
+  box-shadow:none;
+  transform:translateY(2px) scale(0.97);
+}
+
+/* Clear: mint green, full width, like a "reset" tag */
+.clear{
+  grid-column:span 4;
+  background:var(--mint);
+  color:#fff;
+  font-weight:700;
+  letter-spacing:0.3px;
+  box-shadow:0 4px 0 var(--mint-dark);
+}
+.clear:hover{
+  background:#22d68a;
+  transform:translateY(-2px);
+}
+.clear:active{
+  box-shadow:none;
+  transform:translateY(2px) scale(0.98);
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce){
+  button{ transition:none; }
+  button:hover, button:active, .clear:hover, .clear:active, button.equals:hover, button.equals:active{
+    transform:none;
+  }
+}
+
+/* Keyboard focus visibility */
+button:focus-visible{
+  outline:3px solid var(--navy-light);
+  outline-offset:2px;
+}
